@@ -1,0 +1,54 @@
+@startuml
+title Tutorial 3 – Product Class Diagram (Controller → Service → Product)
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #3B6FB6
+  HeaderBackgroundColor #DAE8FC
+}
+hide circle
+
+class Product {
+  - id : Long
+  - name : String
+  - price : double
+  + Product()
+  + Product(id : Long, name : String, price : double)
+  + getId() : Long
+  + getName() : String
+  + getPrice() : double
+  + setId(id : Long) : void
+  + setName(name : String) : void
+  + setPrice(price : double) : void
+}
+
+class ProductService <<@Service>> {
+  - products : List<Product>
+  - nextId : Long
+  + getProducts() : List<Product>
+  + getAllProducts() : List<Product>
+  + getProductById(id : Long) : Optional<Product>
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
+  + findByName(name : String) : List<Product>
+}
+
+class ProductController <<@RestController>> {
+  - productService : ProductService
+  + getById(id : Long) : Product
+  + getProductById(id : Long) : Product
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
+  + search(name : String) : List<Product>
+}
+
+' ..> is a dependency: DASHED line, open arrow
+ProductController ..> ProductService
+
+' --> is an association: SOLID line
+ProductService --> Product : holds 0..*
+
+@enduml

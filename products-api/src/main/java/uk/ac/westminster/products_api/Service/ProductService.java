@@ -13,7 +13,7 @@ public class ProductService {
     private Long nextId = 1L;
 
     public List<Product> getProducts() {
-        System.out.println("hello world");
+
         return products;
     }
 

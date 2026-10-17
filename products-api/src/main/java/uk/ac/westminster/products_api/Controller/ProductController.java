@@ -18,11 +18,10 @@ public class ProductController {
         return new Product(id, "Laptop", 999.99);
 
     }
-
+    @GetMapping("/products/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id).orElse(null);
     }
-
     @PostMapping("/products")
     public Product addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
