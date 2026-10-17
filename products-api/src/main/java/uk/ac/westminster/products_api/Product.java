@@ -32,4 +32,5 @@ public class Product {
     // compiles and runs without any errors.
 
     public double getPrice() { return price; }
+
 }
